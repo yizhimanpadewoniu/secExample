@@ -1,10 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'base.html' %}
+{#{% from 'bootstrap/form.html' import render_form %}#}
+
+{% block content %}
+    <div class="row">
+        {% for message in messages %}
+            <div class="col-sm-4 col-md-4">
+                <div class="thumbnail">
+                    <div class="caption">
+                        <h3>{{ message.vuln_name }}</h3>
+                        <h5>分类：{{ message.sort }}</h5>
+                        <h5>简要：<abbr title="{{ message.description }}">{{ message.description | truncate(length=15, killwords=False) }}</abbr></h5>
+                        <!-- p>描述：{{ message.description }}</p -->
+                        <p><a href="#" class="btn btn-primary" role="button">查看详情</a></p>
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

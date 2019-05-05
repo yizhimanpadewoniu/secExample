@@ -1,0 +1,2 @@
+FLASK_APP=sec_example
+FLASK_ENV=development
