@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
-{% block title %}Login{% endblock %}
+{% block title %}查询{% endblock %}
 {% block content %}
 {#    <div class="jumbotron">#}
 {#        <h1>图形验证码泄露</h1>#}
@@ -8,12 +8,12 @@
 {#    </div>#}
     <div class="row">
         <div class="page-header">
-            <h1>管理员登陆</h1>
+            <h1>用户登陆信息查询</h1>
         </div>
         <div class="col-md-4 col-center-block">
             {{ wtf.quick_form(form) }}
             <!--点击图片重新获取验证码-->
-            <img  src="/code" onclick="this.src='/code?'+ Math.random()">
+{#            <img  src="/lcode" onclick="this.src='/lcode?'+ Math.random()">#}
         </div>
     </div>
 {% endblock %}

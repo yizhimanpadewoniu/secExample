@@ -2,6 +2,10 @@
 {#{% from 'bootstrap/form.html' import render_form %}#}
 
 {% block content %}
+{#    <div class="jumbotron">#}
+{#        <h1>业务漏洞靶场</h1>#}
+{#        <p>不同业务场景存在不同业务场景下的的风险点，针对不同类型的业务漏洞成因，欢迎使用体验。希望你最快GET每种场景下的风险点。</p>#}
+{#    </div>#}
     <div class="row">
         {% for message in messages %}
             <div class="col-sm-4 col-md-4">
@@ -11,7 +15,7 @@
                         <h5>分类：{{ message.sort }}</h5>
                         <h5>简要：<abbr title="{{ message.description }}">{{ message.description | truncate(length=15, killwords=False) }}</abbr></h5>
                         <!-- p>描述：{{ message.description }}</p -->
-                        <p><a href="#" class="btn btn-primary" role="button">查看详情</a></p>
+                        <p><a href="{{ url_for(message.demo_url) }}" class="btn btn-primary" role="button">查看详情</a></p>
                         <p></p>
                     </div>
                 </div>

@@ -6,8 +6,11 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" type="text/css">
-
-
+    <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/npm.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
 </head>
 <body>
 <div class="container">
@@ -31,12 +34,18 @@
 
     <!-- Main component for a primary marketing message or call to action -->
     <div class="jumbotron">
-        <h1>Navbar example</h1>
-        <p>This example is a quick exercise to illustrate how the default, static navbar and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
+        <h1>业务漏洞靶场</h1>
+        <p>不同业务场景存在不同业务场景下的的风险点，针对不同类型的业务漏洞成因，欢迎使用体验。希望你最快GET每种场景下的风险点。</p>
     </div>
-{% block content %}{% endblock %}
+    {% with messages = get_flashed_messages(with_categories=True) %}
+        {% for category, message in messages %}
+            <div id="message_alert" class="alert alert-info alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">&times;</button>
+                <strong>{{ message }}</strong>
+            </div>
+        {% endfor %}
+    {% endwith %}
+    {% block content %}{% endblock %}
 </div> <!-- /container -->
-<script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.js') }}"></script>
-<script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
 </body>
 </html>

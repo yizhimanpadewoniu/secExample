@@ -6,3 +6,15 @@ body {
 .navbar {
   margin-bottom: 20px;
 }
+
+.ManagerLoginMiddle{
+  vertical-align: middle;
+}
+
+
+.col-center-block {
+  float: none;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}

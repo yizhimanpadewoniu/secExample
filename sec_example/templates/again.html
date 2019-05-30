@@ -3,8 +3,8 @@
 {% block title %}Login{% endblock %}
 {% block content %}
 {#    <div class="jumbotron">#}
-{#        <h1>图形验证码泄露</h1>#}
-{#        <p>图形验证码在返回包Response Header中显示。造成图形验证码机制可被绕过，从而进行暴力破解等方式攻击。</p>#}
+{#        <h1>图形验证码重用</h1>#}
+{#        <p>图片验证码在成功使用后，未立即重置，或图形验证码为保证一次有效性，可使用上一次或之前的图片验证码进行校验。</p>#}
 {#    </div>#}
     <div class="row">
         <div class="page-header">
@@ -13,7 +13,7 @@
         <div class="col-md-4 col-center-block">
             {{ wtf.quick_form(form) }}
             <!--点击图片重新获取验证码-->
-            <img  src="/code" onclick="this.src='/code?'+ Math.random()">
+            <img  src="/agcode " onclick="this.src='/agcode?'+ Math.random()">
         </div>
     </div>
 {% endblock %}

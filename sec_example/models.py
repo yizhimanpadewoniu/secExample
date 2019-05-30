@@ -21,17 +21,22 @@ class sort_info(db.Model):
     vuln_name = db.Column(db.String(255))
     description = db.Column(db.String(255))
     timestamp = db.Column(db.DateTime, default=datetime.utcnow, index=True)
+    demo_url = db.Column(db.String(255))
 
+class User(db.Model):
+    __tablename__ = 'User'
+    email = db.Column(db.String(255), primary_key=True)
+    password = db.Column(db.String(255))
+    username = db.Column(db.String(255))
+    role = db.Column(db.String(255))
+    phone = db.Column(db.String(11))
 
-# class CreateImgCode():
-    # def ImgCodeLeak(self):
-    #     CodeNums = '0123456789'
-    #     CodeLens = 4
-    #     for i in CodeLens:
-    #         CodeImgStr += CodeNums[random.randint[0, len(CodeNums)-1]]
-    #     ImgCodeNum = random.randint()
-    # ImgCodeInt = random.randint(1000, 9999)
-
+class user_info(db.Model):
+    __tablename__ = 'user_info'
+    email = db.Column(db.String(255), primary_key=True)
+    username = db.Column(db.String(255))
+    role = db.Column(db.String(255))
+    phone = db.Column(db.String(255))
 
 def validate_picture():
     total = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345789'
@@ -41,13 +46,13 @@ def validate_picture():
     # 先生成一个新图片对象
     im = Image.new('RGB',(width, heighth), 'white')
     # 设置字体
-    font = ImageFont.truetype('FreeSans', 40)
+    font = ImageFont.truetype(r"C:\Windows\Fonts\FreeSans.ttf", 40)
     # 创建draw对象
     draw = ImageDraw.Draw(im)
     str = ''
     # 输出每一个文字
-    for item in range(5):
-        text = random.choice(total)
+    for item in range(4):
+        text = total[random.randint(0, (len(total)-1))]
         str += text
         draw.text((5+random.randint(4,7)+20*item,5+random.randint(3,7)), text=text, fill='black',font=font )
 
