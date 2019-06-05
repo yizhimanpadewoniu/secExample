@@ -8,8 +8,6 @@
 
 import random
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
-
-
 from datetime import datetime
 from sec_example import db
 
@@ -24,19 +22,20 @@ class sort_info(db.Model):
     demo_url = db.Column(db.String(255))
 
 class User(db.Model):
-    __tablename__ = 'User'
-    email = db.Column(db.String(255), primary_key=True)
+    __tablename__ = 'user'
+    email = db.Column(db.String(255), primary_key=True, index=True)
     password = db.Column(db.String(255))
     username = db.Column(db.String(255))
     role = db.Column(db.String(255))
     phone = db.Column(db.String(11))
 
-class user_info(db.Model):
+class User_info(db.Model):
     __tablename__ = 'user_info'
-    email = db.Column(db.String(255), primary_key=True)
+    email = db.Column(db.String(255), primary_key=True, index=True)
     username = db.Column(db.String(255))
     role = db.Column(db.String(255))
     phone = db.Column(db.String(255))
+
 
 def validate_picture():
     total = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345789'
@@ -54,7 +53,7 @@ def validate_picture():
     for item in range(4):
         text = total[random.randint(0, (len(total)-1))]
         str += text
-        draw.text((5+random.randint(4,7)+20*item,5+random.randint(3,7)), text=text, fill='black',font=font )
+        draw.text((5+random.randint(4,7)+20*item,5+random.randint(3,7)), text=text, fill='black',font=font)
 
     # 划几根干扰线
     for num in range(8):

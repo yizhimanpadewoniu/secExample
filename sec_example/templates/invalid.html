@@ -9,11 +9,12 @@
     <div class="row">
         <div class="page-header">
             <h1>管理员登陆</h1>
+            <h4>本业务场景模拟登陆业务场景中的图形验证码机制校验逻辑错误，造成图形验证码校验机制失效，因此可以进行暴力破解进行登陆。</h4>
         </div>
         <div class="col-md-4 col-center-block">
             {{ wtf.quick_form(form) }}
             <!--点击图片重新获取验证码-->
-            <img  src="/vgcode " onclick="this.src='/vgcode?'+ Math.random()">
+            <img src="/invalid_code" onclick="this.src='/invalid_code?'+ Math.random()">
         </div>
     </div>
 {% endblock %}
