@@ -20,3 +20,8 @@ class LoginForm(FlaskForm):
 class AcctQueryForm(FlaskForm):
     email = StringField('电子邮箱', validators=[DataRequired(), Length(1,64), Email()], default=None, id='username')
     submit = SubmitField('查询')
+
+
+class UserInfoQuery(FlaskForm):
+    username = StringField('用户名', validators=[DataRequired(), Length(1,64)], default=None, id='username')
+    submit = SubmitField('查询')

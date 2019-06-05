@@ -6,12 +6,16 @@
 # @File : views.py 
 # @Software: PyCharm
 
-from flask import render_template, url_for, make_response, session, flash, redirect, request, get_flashed_messages, jsonify
+from flask import render_template, url_for, make_response, session, flash, redirect, \
+    request, get_flashed_messages, jsonify, Response, json
 from io import BytesIO
 from sec_example import app, db, forms, models
 from sec_example.models import validate_picture
-from sec_example.models import User, user_info, sort_info
-from sqlalchemy import exists, or_
+from sec_example.models import User, User_info, sort_info
+from sqlalchemy.orm import sessionmaker
+
+# sql_session = sessionmaker(db)()
+db.create_all()
 
 
 @app.route('/', methods=['GET'])
@@ -58,9 +62,9 @@ def login():
     return render_template('login.html', form=form)
 
 
-# 图形验证码重复使用——生成图形验证码
-@app.route('/vgcode')
-def get_vgcode():
+# 图形验证码失效——生成图形验证码
+@app.route('/invalid_code')
+def get_invalid_gcode():
     ag_image, ag_str = validate_picture()
     # 将验证码图片以二进制形式写入在内存中，防止将图片都放在文件夹中，占用大量磁盘
     ag_buf = BytesIO()
@@ -74,40 +78,38 @@ def get_vgcode():
     return response
 
 
-# # 图形验证码重复使用
+# 图形验证码失效invalid
 @app.route('/invalid', methods=['GET', 'POST'])
 def invalid():
-    invali_form = forms.LoginForm()
-    if invali_form.validate_on_submit():
-        user = User.query.filter_by(email=invali_form.email.data).first()
+    invalid_form = forms.LoginForm()
+    if invalid_form.validate_on_submit():
+        user = User.query.filter_by(email=invalid_form.email.data).first()
         if user is None:
             flash('用户不存在，请使用admin@yeepay.com登陆.', category='User_Exist')
-            return render_template('invalid.html', form=invali_form)
-        if session.get('image') != invali_form.verify_code.data:
+            return render_template('invalid.html', form=invalid_form)
+        if session.get('image') != invalid_form.verify_code.data:
             flash(u'验证码错误.', category='verify_code_error')
             # return render_template('again.html', form=again_form)
-        if User.query.filter_by(password=invali_form.password.data).first() is not None:
+        if User.query.filter_by(password=invalid_form.password.data).first() is not None:
             flash(u'验证通过，登录成功!', category='OK')
         else:
             flash(u'用户名或者密码不正确', category='No_Pass')
-    return render_template('again.html', form=invali_form)
+    return render_template('invalid.html', form=invalid_form)
 
-#
+# 多余信息泄露
 @app.route('/leak', methods=['GET', 'POST'])
 def leak():
     leak_form = forms.AcctQueryForm()
     if leak_form.validate_on_submit():
-        user = user_info.query.filter(user_info.email==leak_form.email.data).all()
-        print(user)
-        print(type(user))
+        user = db.session.query(User_info).filter(User_info.email==leak_form.email.data).first()
         if user is None:
             flash('用户不存在。', category='User_Exist')
             return render_template('leak.html', form=leak_form)
         else:
             flash('用户存在')
-            response_data = user
-            print(response_data)
-            # return jsonify(response_data)
+            response = jsonify(name_email=user.email, username=user.username, user_role=user.role, user_phone=user.phone)
+            response.mimetype = 'application/json; charset=utf-8'
+            return response
     return render_template('leak.html', form=leak_form)
 
 @app.route('/imgdos')
@@ -130,4 +132,20 @@ def get_agcode():
 
 @app.route('/again')
 def again():
-    return "<h1>img invalid</h1>"
+    return "<h1>imgdos</h1>"
+
+@app.route('/yqcx')
+def yqcx():
+    again_form = forms.AcctQueryForm()
+    if again_form.validate_on_submit():
+        user = db.session.query(User_info).filter(User_info.email == again_form.email.data).first()
+        if user is None:
+            flash('用户不存在。', category='User_Exist')
+            return render_template('leak.html', form=again_form)
+        else:
+            flash('用户存在')
+            response = jsonify(name_email=user.email, username=user.username, user_role=user.role,
+                               user_phone=user.phone)
+            response.mimetype = 'application/json; charset=utf-8'
+            return response
+    return render_template('yqcq.html', form=again_form)
