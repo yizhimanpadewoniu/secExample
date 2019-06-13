@@ -53,7 +53,7 @@ def login():
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
         if user is None:
-            flash('用户不存在，请使用admin@yeepay.com登陆.', category='User_Exist')
+            flash('用户不存在，请使用admin@qq.com登陆.', category='User_Exist')
             return render_template('login.html', form=form)
         if session.get('image') != form.verify_code.data:
             flash(u'验证码错误.', category='verify_code_error')
@@ -90,7 +90,7 @@ def invalid():
     if invalid_form.validate_on_submit():
         user = User.query.filter_by(email=invalid_form.email.data).first()
         if user is None:
-            flash('用户不存在，请使用admin@yeepay.com登陆.', category='User_Exist')
+            flash('用户不存在，请使用admin@qq.com登陆.', category='User_Exist')
             return render_template('invalid.html', form=invalid_form)
         if session.get('image') != invalid_form.verify_code.data:
             flash(u'验证码错误.', category='verify_code_error')
