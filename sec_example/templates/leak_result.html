@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block title %}查询{% endblock %}
+{% block content %}
+    {#    <div class="jumbotron">#}
+    {#        <h1>图形验证码泄露</h1>#}
+    {#        <p>图形验证码在返回包Response Header中显示。造成图形验证码机制可被绕过，从而进行暴力破解等方式攻击。</p>#}
+    {#    </div>#}
+    <div class="row">
+        <div class="page-header">
+            <h1>用户登陆信息查询</h1>
+            <h4>本业务场景模拟登陆业务场景中的图形验证码机制校验逻辑错误，造成图形验证码校验机制失效，因此可以进行暴力破解进行登陆。</h4>
+        </div>
+        <div class="col-md-4 col-center-block">
+            {{ wtf.quick_form(form) }}
+            <!--点击图片重新获取验证码-->
+            {# <img  src="/lcode" onclick="this.src='/lcode?'+ Math.random()"> #}
+            <img src="">
+        </div>
+        <div>
+        <p>asfasdfasdf</p>
+           <ul>
+           {{ messages }}
+               {% for message in messages %}
+               <li>{{ message }}</li>
+               {% endfor %}
+           </ul>
+        </div>
+    </div>
+{% endblock %}
