@@ -9,7 +9,7 @@
 import os
 
 from flask import Flask
-from sec_example.views import sec_app
+from sec_example.views import sec_bp
 from sec_example.extensions import db
 from sec_example.settings import config
 # from sec_example.views import sec_app
