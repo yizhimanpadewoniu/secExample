@@ -7,20 +7,15 @@
 # @Software: PyCharm
 
 from flask import Flask, render_template, url_for, make_response, session, flash, redirect, request, get_flashed_messages, jsonify, Response, json
-from flask import current_app
+from flask import current_app, Blueprint
 from io import BytesIO
 from sec_example.extensions import db
 from sec_example import forms, models, create_app
 from sec_example.models import validate_picture
 from sec_example.models import User, User_info, sort_info
-from sqlalchemy.orm import sessionmaker
 
-# sql_session = sessionmaker(db)()
-# db.create_all()
-# app_init = current_app()
-sec_app = create_app()
-# sec_app = Flask(__name__)
-# print(type(app))
+
+sec_app = Blueprint('views', __name__)
 
 
 @sec_app.route('/', methods=['GET'])

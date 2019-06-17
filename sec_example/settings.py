@@ -21,7 +21,7 @@ from sqlalchemy.ext.declarative import declarative_base
 # engine = create_engine(DB_URI)
 # Base = declarative_base(engine)
 
-dev_db = "mysql+pymysql://root:root@127.0.0.1:52206/sec_example"
+# dev_db = "mysql+pymysql://root:root@127.0.0.1:52206/sec_example"
 # dev_db = "mysql+pymysql://root:root@172.18.62.46:3306/sec_example"
 
 SECRET_KEY = os.getenv('SECRET_KEY', 'afsdfasdfasdfasdfasdfasdfasdf')
@@ -29,7 +29,7 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'afsdfasdfasdfasdfasdfasdfasdf')
 # SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URI', dev_db)
 
 
-Debug = True
+# Debug = True
 
 basedir = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 
@@ -46,14 +46,16 @@ class BaseConfig(object):
 
 class DevelopmentConfig(BaseConfig):
     # SQLALCHEMY_DATABASE_URI = prefix + os.path.join(basedir, 'data-dev.db')
+    # QLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URI', dev_db)
+    dev_db = "mysql+pymysql://root:123@127.0.0.1:3306/sec_example"
+    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URI', dev_db)
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    QLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URI', dev_db)
 
 class ProductionConfig(BaseConfig):
     # SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL', prefix + os.path.join(basedir, 'data.db'))
+    dev_db = "mysql+pymysql://root:123@127.0.0.1:3306/sec_example"
+    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URI', dev_db)
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    QLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URI', dev_db)
-
 
 config = {
     'development': DevelopmentConfig,
