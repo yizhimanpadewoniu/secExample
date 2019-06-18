@@ -9,7 +9,7 @@
 import random
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 from datetime import datetime
-from sec_example import db
+from sec_example.extensions import db
 
 
 class sort_info(db.Model):

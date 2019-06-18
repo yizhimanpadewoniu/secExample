@@ -9,7 +9,7 @@
 import os
 
 from flask import Flask
-from sec_example.views import sec_bp
+from sec_example.sec_views import sec_bp
 from sec_example.extensions import db
 from sec_example.settings import config
 # from sec_example.views import sec_app
@@ -22,15 +22,15 @@ def create_app(config_name=None):
     app.config.from_object(config[config_name])
 
     register_extension(app)
-    register_views(app)
+    register_blueprints(app)
 
     return app
 
 def register_extension(app):
     db.init_app(app)
 
-def register_views(app):
-    app.register_blueprint(app)
+def register_blueprints(app):
+    app.register_blueprint(sec_bp)
     # sec_app(app)
     # app = Flask('sec_example')
     # app.config.from_pyfile('settings.py')
@@ -40,4 +40,4 @@ def register_views(app):
 
 
 
-from sec_example import views, settings
+from sec_example import sec_views, settings
