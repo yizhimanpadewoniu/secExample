@@ -10,8 +10,9 @@ import os
 
 from flask import Flask
 from sec_example.sec_views import sec_bp
-from sec_example.extensions import db
+from sec_example.extensions import db, bootstrap
 from sec_example.settings import config
+# from sec_example import sec_views, settings
 # from sec_example.views import sec_app
 
 def create_app(config_name=None):
@@ -27,6 +28,7 @@ def create_app(config_name=None):
     return app
 
 def register_extension(app):
+    bootstrap.init_app(app)
     db.init_app(app)
 
 def register_blueprints(app):
@@ -40,4 +42,4 @@ def register_blueprints(app):
 
 
 
-from sec_example import sec_views, settings
+

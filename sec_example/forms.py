@@ -25,3 +25,15 @@ class AcctQueryForm(FlaskForm):
 class UserInfoQuery(FlaskForm):
     username = StringField('用户名', validators=[DataRequired(), Length(1,64)], default=None, id='username')
     submit = SubmitField('查询')
+
+
+class YqcxInfoQuery(FlaskForm):
+    email = SubmitField('电子邮箱', validators=[DataRequired(), Length(1, 64), Email()], default=None, id='user_email')
+    submit = SubmitField('查询')
+
+
+class Captcha_again(FlaskForm):
+    email = StringField('电子邮箱', validators=[DataRequired(), Length(1, 64), Email()], default=None, id='user_email')
+    password = PasswordField('密码', validators=[DataRequired()], default=None, id='user_passwd')
+    verify_code = StringField('验证码', validators=[DataRequired(), Length(1, 5)], default=None, id='verify_code')
+    submit = SubmitField('登录')

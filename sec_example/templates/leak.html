@@ -18,10 +18,9 @@
         </div>
         <div>
             <ul>
-                <li style="display: none">user email: {{ messages['name_email'] }}</li>
-                <li style="display: none">username: {{ messages['username'] }}</li>
-                <li style="display: none">user role: {{ messages['user_role'] }}</li>
-                <li style="display: none">user phone: {{ messages['user_phone'] }}</li>
+                {% for message in messages %}
+                <li style="display: none">{{ messages[message] }}</li>
+                {% endfor %}
             </ul>
         </div>
     </div>
