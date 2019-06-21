@@ -36,6 +36,25 @@ class User_info(db.Model):
     role = db.Column(db.String(255))
     phone = db.Column(db.String(255))
 
+class Yqcx_info(db.Model):
+    __tablename__ = 'yqcx_info'
+    email = db.Column(db.String(255), primary_key=True, index=True)
+    username = db.Column(db.String(255))
+    phone = db.Column(db.String(255))
+    flag = db.Column(db.String(255))
+    address = db.Column(db.String(255))
+    company = db.Column(db.String(255))
+    id_card = db.Column(db.String(255))
+
+
+class User_login(db.Model):
+    __tablename__ = 'user_login'
+    email = db.Column(db.String(255), primary_key=True, index=True)
+    password = db.Column(db.String(255))
+    username = db.Column(db.String(255))
+    role = db.Column(db.String(255))
+    phone = db.Column(db.String(11))
+
 
 def validate_picture():
     total = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345789'
@@ -46,6 +65,7 @@ def validate_picture():
     im = Image.new('RGB',(width, heighth), 'white')
     # 设置字体
     font = ImageFont.truetype(r"C:\Windows\Fonts\FreeSans.ttf", 40)
+    # font = ImageFont.truetype(r"")
     # 创建draw对象
     draw = ImageDraw.Draw(im)
     str = ''
@@ -65,4 +85,5 @@ def validate_picture():
 
     # 模糊下,加个帅帅的滤镜～
     im = im.filter(ImageFilter.FIND_EDGES)
+
     return im, str

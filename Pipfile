@@ -12,6 +12,10 @@ pymysql = "*"
 flask-bootstrap = "*"
 pillow = "*"
 python-dotenv = "*"
+pymemcache = "*"
+flask-wtf = "*"
+update = "*"
+python-memcached = "*"
 
 [requires]
 python_version = "3.7"

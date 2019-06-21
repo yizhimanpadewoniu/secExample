@@ -47,13 +47,15 @@ class BaseConfig(object):
 class DevelopmentConfig(BaseConfig):
     # SQLALCHEMY_DATABASE_URI = prefix + os.path.join(basedir, 'data-dev.db')
     # QLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URI', dev_db)
-    dev_db = "mysql+pymysql://root:123@127.0.0.1:3306/sec_example"
+    dev_db = "mysql+pymysql://root:123@172.18.62.75:3306/sec_example"
+    # dev_db = "mysql+pymysql://root:root@127.0.0.1:52206/sec_example"
     SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URI', dev_db)
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 class ProductionConfig(BaseConfig):
     # SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL', prefix + os.path.join(basedir, 'data.db'))
-    dev_db = "mysql+pymysql://root:123@127.0.0.1:3306/sec_example"
+    dev_db = "mysql+pymysql://root:123@172.18.62.75:3306/sec_example"
+    # dev_db = "mysql+pymysql://root:root@127.0.0.1:52206/sec_example"
     SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URI', dev_db)
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
